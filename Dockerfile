@@ -55,4 +55,4 @@ RUN make -j$(grep -c '^processor' /proc/cpuinfo)  install
 RUN cd $GCC_SRC_DIR && cp COPYING*.LIB $GCC_PREFIX_DIR
 
 ARG TARGET_TARBALL=/openjdk-gcc-libs-$GCC_VERSION.tar.gz
-RUN cd $GCC_PREFIX_DIR && tar --hard-dereference -zcf "$TARGET_TARBALL" ./COPYING* ./lib64
+RUN cd $GCC_PREFIX_DIR && tar --hard-dereference -zcf "$TARGET_TARBALL" .
