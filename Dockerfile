@@ -10,15 +10,6 @@ ARG GCC_BUILD_DIR=/builder/build
 ARG GLIBC_COMPAT_DIR=/usr/glibc-compat
 
 #
-#  This is likely to be changed, though one should try to match the tag
-#  to the argument.  To wit:
-#
-#    GCC_VERSION=8.2.0 docker build --build-arg GCC_VERSION=$GCC_VERSION \
-#        --tag openjdk-gcc-build:$GCC_VERSION
-#
-ARG GCC_VERSION=8.2.0
-
-#
 #  Don't mess with this.  We use pipelines in the RUN steps and we want failures
 #  to propagate outward to the &&s
 #
@@ -35,6 +26,15 @@ RUN apt-get -q update \
 		libmpc-dev \
 		wget \
 	&& rm -rf /var/lib/apt/lists/*
+
+#
+#  This is likely to be changed, though one should try to match the tag
+#  to the argument.  To wit:
+#
+#    GCC_VERSION=8.2.0 docker build --build-arg GCC_VERSION=$GCC_VERSION \
+#        --tag openjdk-gcc-build:$GCC_VERSION
+#
+ARG GCC_VERSION=8.2.0
 
 #
 #  Download GCC, check to make sure the server wasn't hacked, and unpack
