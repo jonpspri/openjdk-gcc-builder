@@ -13,12 +13,13 @@ ARG GLIBC_COMPAT_DIR=/usr/glibc-compat
 #  Don't mess with this.  We use pipelines in the RUN steps and we want failures
 #  to propagate outward to the &&s
 #
-SHELL [ "bash", "-o", "pipefail", "-c" ]
+SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
 #
 #  'build-essentials' may be overkill, but not by much.  Maybe someone in a
 #  good mood will care to experiment.
 #
+#hadolint ignore=DL3008
 RUN apt-get -q update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get -qy --no-install-recommends install \
 		build-essential \
@@ -34,7 +35,7 @@ RUN apt-get -q update \
 #    GCC_VERSION=8.2.0 docker build --build-arg GCC_VERSION=$GCC_VERSION \
 #        --tag openjdk-gcc-build:$GCC_VERSION
 #
-ARG GCC_VERSION=8.2.0
+ARG GCC_VERSION=9.1.0
 
 #
 #  Download GCC, check to make sure the server wasn't hacked, and unpack
